@@ -1,0 +1,35 @@
+server:
+  port: 19091
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/order/** # /order 로 시작하는 모든 요청은 eureka application name: order-service 로 호출되도록 설정합니다.
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/products/** # /products 로 시작하는 모든 요청은 eureka application name: product-service 로 호출되도록 설정합니다.
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/** # /auth 로 시작하는 모든 요청은 eureka application name: auth-service 로 호출되도록 설정합니다.
+      discovery:
+        locator:
+          enabled: true
+
+service:
+  jwt:
+    secret-key: "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429080fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
