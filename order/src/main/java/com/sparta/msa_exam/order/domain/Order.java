@@ -21,7 +21,6 @@ public class Order {
     private String name;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
-    @Column(name = "supply_price")
     private List<OrderProduct> productList;
 
     public static Order create(final String name) {
