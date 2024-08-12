@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.server;
+package com.sparta.msa_exam;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.server;
+package com.sparta.msa_exam;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

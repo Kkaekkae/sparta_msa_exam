@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.server;
+package com.sparta.msa_exam;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
