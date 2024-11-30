@@ -1,7 +1,16 @@
 package com.sparta.msa_exam.auth.domain;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user")
@@ -15,15 +24,19 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_id")
-    private String userId;
+    @Column(name = "username")
+    private String username;
+
+    private String password;
 
     // 유저 생성 메서드
     public static User create(
-            final String userId
+            final String username,
+            final String password
     ) {
         return User.builder()
-                .userId(userId)
+                .username(username)
+                .password(password)
                 .build();
     }
 }

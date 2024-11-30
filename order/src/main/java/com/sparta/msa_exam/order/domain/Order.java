@@ -1,8 +1,13 @@
 package com.sparta.msa_exam.order.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,14 +26,17 @@ public class Order {
     private String name;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
-    private List<OrderProduct> productList;
+    private List<OrderProduct> productList = new ArrayList<>();
 
     public static Order create(final String name) {
-        return Order.builder().name(name).build();
+        return Order.builder()
+                .name(name)
+                .productList(new ArrayList<>())
+                .build();
     }
 
     // 주문에 상품 추가 메서드
-    public void addProduct(OrderProduct product){
+    public void addProduct(OrderProduct product) {
         productList.add(product);
     }
 }

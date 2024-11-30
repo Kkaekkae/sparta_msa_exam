@@ -14,6 +14,24 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
     show-sql: false
 
+resilience4j:
+  circuitbreaker:
+    configs:
+      default: # 기본 구성 이름
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 5
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 60000
+        failureRateThreshold: 50
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 20s
+
+feign:
+  circuitbreaker:
+    enabled: true
+
 eureka:
   client:
     service-url:

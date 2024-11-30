@@ -1,6 +1,10 @@
 package com.sparta.msa_exam.auth.application.dtos;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 // 유저 로그인 시 응답 객체 입니다.
 @Getter

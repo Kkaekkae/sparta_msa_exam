@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -21,17 +21,24 @@ public class OrderController {
         this.orderService = orderService;
         this.serverPort = serverPort;
     }
+
     // 주문 단건 조회 API
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderResponse> getOrder(@PathVariable(name = "orderId") Long orderId) {
-        return createResponse(ResponseEntity.ok(orderService.getOrder(orderId)));
+    public ResponseEntity<OrderResponse> getOrder(@RequestParam(value = "fallback", required = false) boolean fallback,
+                                                  @PathVariable(name = "orderId") Long orderId) {
+
+        OrderResponse response = fallback
+                ? orderService.fallback()
+                : orderService.getOrder(orderId);
+
+        return createResponse(ResponseEntity.ok(response));
     }
 
     // 주문 추가 API
     @PostMapping
-    public ResponseEntity<Boolean> createOrder(@RequestBody CreateOrderRequest request) {
-        orderService.createOrder(request);
-        return createResponse(ResponseEntity.ok(true));
+    public ResponseEntity<OrderResponse> createOrder(@RequestBody CreateOrderRequest request) {
+        OrderResponse response = orderService.createOrder(request);
+        return createResponse(ResponseEntity.ok(response));
     }
 
     // 주문에 상품을 추가하는 API

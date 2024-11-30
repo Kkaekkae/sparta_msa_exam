@@ -12,18 +12,17 @@ spring:
         - id: order-service
           uri: lb://order-service
           predicates:
-            - Path=/order/** # /order 로 시작하는 모든 요청은 eureka application name: order-service 로 호출되도록 설정합니다.
+            - Path=/orders/** # /orders 로 시작하는 모든 요청은 eureka application name: order-service 로 호출되도록 설정합니다.
         - id: product-service
           uri: lb://product-service
           predicates:
             - Path=/products/** # /products 로 시작하는 모든 요청은 eureka application name: product-service 로 호출되도록 설정합니다.
+          filters:
+            - name: WeightedLoadBalancerFilter
         - id: auth-service
           uri: lb://auth-service
           predicates:
             - Path=/auth/** # /auth 로 시작하는 모든 요청은 eureka application name: auth-service 로 호출되도록 설정합니다.
-      discovery:
-        locator:
-          enabled: true
 
 service:
   jwt:

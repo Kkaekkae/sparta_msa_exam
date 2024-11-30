@@ -20,7 +20,7 @@ eureka:
       defaultZone: http://localhost:19090/eureka/
 
 management:
-  zipkin:  # Zipkin 설정 - 필수 과제 - 분산추적 구현해보기
+  zipkin: # Zipkin 설정 - 필수 과제 - 분산추적 구현해보기
     tracing:
       endpoint: "http://localhost:9411/api/v2/spans"
   tracing:

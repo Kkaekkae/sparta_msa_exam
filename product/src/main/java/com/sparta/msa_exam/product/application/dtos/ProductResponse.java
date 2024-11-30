@@ -1,7 +1,11 @@
 package com.sparta.msa_exam.product.application.dtos;
 
 import com.sparta.msa_exam.product.domain.Product;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 

@@ -3,11 +3,17 @@ package com.sparta.msa_exam.auth.controller;
 
 import com.sparta.msa_exam.auth.application.AuthService;
 import com.sparta.msa_exam.auth.application.dtos.AuthResponse;
+import com.sparta.msa_exam.auth.application.dtos.SignInRequest;
 import com.sparta.msa_exam.auth.application.dtos.SignUpRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -24,21 +30,21 @@ public class AuthController {
     }
 
     // 로그인 API
-    @GetMapping("/signIn")
-    public ResponseEntity<AuthResponse> createAuthenticationToken(final @RequestParam(value = "user_id") String userId){
-        final AuthResponse response = authService.createAccessToken(userId);
+    @PostMapping("/sign-in")
+    public ResponseEntity<AuthResponse> createAuthenticationToken(final @RequestBody SignInRequest request) {
+        final AuthResponse response = authService.createAccessToken(request);
         return createResponse(ResponseEntity.ok(response));
     }
 
-    // userId 존재여부 검증 API 입니다. - 도전 기능 - DB를 이용한 회원가입으로 서비스를 만들어보세요!
+    // userId 존재여부 검증 API 입니다
     @GetMapping("/verify")
-    public ResponseEntity<Boolean> verifyUser(final @RequestParam(value = "user_id") String userId) {
+    public ResponseEntity<Boolean> verifyUser(final @RequestParam(value = "user_id") Long userId) {
         Boolean response = authService.verifyUser(userId);
         return createResponse(ResponseEntity.ok(response));
     }
 
-    // 회원가입 API 입니다. - 도전 기능 - DB를 이용한 회원가입으로 서비스를 만들어보세요!
-    @PostMapping("/signUp")
+    // 회원가입 API 입니다.
+    @PostMapping("/sign-up")
     public ResponseEntity<Boolean> createUser(@RequestBody SignUpRequest request) {
         authService.createUser(request);
         return createResponse(ResponseEntity.ok(true));

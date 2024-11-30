@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-// 회원가입 요청 객체 입니다.
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignUpRequest {
-    private String username;
-    private String password;
+public class SignInRequest {
+    String username;
+    String password;
 }
